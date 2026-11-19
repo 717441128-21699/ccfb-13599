@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>中文口型自动生成系统</title>
+    <link rel="stylesheet" href="/src/ui/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <h1>中文口型自动生成系统</h1>
+        <span class="subtitle">拼音音素切分 · 强制对齐 · 14 口型曲线 · 三维预览</span>
+      </header>
+
+      <section class="main">
+        <div class="left-panel">
+          <div class="card controls">
+            <label>样本台词
+              <select id="line-select"></select>
+            </label>
+            <label>配音 profile
+              <select id="profile-select"></select>
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" id="noise-toggle" />
+              混入背景音乐 + 音效
+            </label>
+            <div class="btn-row">
+              <button id="btn-play" class="primary">▶ 播放</button>
+              <button id="btn-pause">⏸ 暂停</button>
+              <button id="btn-reload">重新生成</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <label>自定义台词（支持儿化/轻声/变调）
+              <textarea id="custom-text" rows="3" placeholder="例如：今天天气真好，我们一起出去玩儿吧！"></textarea>
+            </label>
+            <div class="btn-row">
+              <button id="btn-apply-text">生成口型</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <label>导入配音 WAV（16k/单声道/16bit）
+              <input type="file" id="wav-file" accept=".wav" />
+            </label>
+            <div class="btn-row">
+              <button id="btn-export">导出曲线 JSON + WAV</button>
+            </div>
+          </div>
+
+          <div class="card legend">
+            <h3>14 口型</h3>
+            <div class="viseme-grid" id="viseme-legend"></div>
+          </div>
+        </div>
+
+        <div class="right-panel">
+          <div class="card viewport-card">
+            <canvas id="three-canvas"></canvas>
+          </div>
+          <div class="card timeline-card">
+            <canvas id="timeline-canvas"></canvas>
+            <p class="hint">拖拽菱形关键帧可改时间（横向，自动吸附 30fps 帧网格）与权重（纵向）；点击波形移动播放头；滚轮缩放时间线。</p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script type="module" src="/src/ui/main.ts"></script>
+  </body>
+</html>
